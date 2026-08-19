@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,11 +14,30 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Vector2 input = Vector2.zero;
 
-        Vector3 movement = new Vector3(horizontal, 0f, vertical);
+        if (Keyboard.current != null)
+        {
+            if (Keyboard.current.aKey.isPressed)
+                input.x -= 1;
 
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+            if (Keyboard.current.dKey.isPressed)
+                input.x += 1;
+
+            if (Keyboard.current.sKey.isPressed)
+                input.y -= 1;
+
+            if (Keyboard.current.wKey.isPressed)
+                input.y += 1;
+        }
+
+        Vector3 movement = transform.right * input.x +
+                           transform.forward * input.y;
+
+        movement.y = 0f;
+
+        rb.MovePosition(
+            rb.position + movement * speed * Time.fixedDeltaTime
+        );
     }
 }
