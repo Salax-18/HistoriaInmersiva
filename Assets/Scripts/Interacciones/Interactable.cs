@@ -16,17 +16,25 @@ public class Interactable : MonoBehaviour
     public float exitDistance = 10f;
 
     private DepthOfField depthOfField;
+    private Vignette vignette;
 
     private void Start()
     {
         if (volume != null)
         {
             volume.profile.TryGet(out depthOfField);
+            volume.profile.TryGet(out vignette);
 
-            // El efecto empieza apagado
             if (depthOfField != null)
             {
                 depthOfField.active = false;
+            }
+
+            if (vignette != null)
+            {
+                vignette.active = true;
+                vignette.intensity.overrideState = true;
+                vignette.intensity.value = 0f;
             }
         }
     }
@@ -37,12 +45,16 @@ public class Interactable : MonoBehaviour
 
         if (depthOfField != null)
         {
-            // Activar el efecto al interactuar
             depthOfField.active = true;
 
-            // Enfocar la fotografía
             depthOfField.focusDistance.overrideState = true;
             depthOfField.focusDistance.value = 8f;
+        }
+
+        if (vignette != null)
+        {
+            vignette.intensity.overrideState = true;
+            vignette.intensity.value = 0.35f;
         }
     }
 
@@ -56,10 +68,19 @@ public class Interactable : MonoBehaviour
             transform.position
         );
 
-        // Al alejarse, volver a enfocar todo
-        if (distance > exitDistance)
+
+         if (distance > exitDistance)
         {
-            depthOfField.active = false;
+          
+            if (depthOfField != null)
+            {
+                depthOfField.active = false;
+            }
+
+            if (vignette != null)
+            {
+                vignette.intensity.value = 0f;
+            }
         }
     }
 }

@@ -1286,7 +1286,7 @@ MonoBehaviour:
   interactionName: Examinar
   volume: {fileID: 1325319353}
   playerCamera: {fileID: 1583815600}
-  exitDistance: 12
+  exitDistance: 6
 --- !u!1 &846016631
 GameObject:
   m_ObjectHideFlags: 0
