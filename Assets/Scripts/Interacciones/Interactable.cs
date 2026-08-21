@@ -6,6 +6,9 @@ public class Interactable : MonoBehaviour
 {
     public string interactionName = "Examinar";
 
+    [Header("Dialogue")]
+    public DialogueManager dialogueManager;
+
     [Header("Depth of Field")]
     public Volume volume;
 
@@ -20,6 +23,7 @@ public class Interactable : MonoBehaviour
 
     private void Start()
     {
+       
         if (volume != null)
         {
             volume.profile.TryGet(out depthOfField);
@@ -43,6 +47,15 @@ public class Interactable : MonoBehaviour
     {
         Debug.Log("Interacción con: " + gameObject.name);
 
+      
+
+        if (dialogueManager != null)
+        {
+            dialogueManager.StartDialogue();
+            return;
+        }
+
+
         if (depthOfField != null)
         {
             depthOfField.active = true;
@@ -60,6 +73,11 @@ public class Interactable : MonoBehaviour
 
     private void Update()
     {
+        // Si este objeto es un terapeuta con diálogo,
+        // no necesitamos controlar el Depth of Field.
+        if (dialogueManager != null)
+            return;
+
         if (depthOfField == null || playerCamera == null)
             return;
 
@@ -68,10 +86,8 @@ public class Interactable : MonoBehaviour
             transform.position
         );
 
-
-         if (distance > exitDistance)
+        if (distance > exitDistance)
         {
-          
             if (depthOfField != null)
             {
                 depthOfField.active = false;
