@@ -510,7 +510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.909
+      value: -6.49
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -544,10 +544,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sitting Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bb8399db3e649c443b2c634e8b926370, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1766194959}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1766194958}
   m_SourcePrefab: {fileID: 100100000, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
 --- !u!1 &251771554
 GameObject:
@@ -1269,7 +1279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2210472296847702642, guid: d65d78b99fd2e44939b2b08128e48518, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.4300003
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 2210472296847702642, guid: d65d78b99fd2e44939b2b08128e48518, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1302,10 +1312,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1578226325687279816, guid: d65d78b99fd2e44939b2b08128e48518, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1511598314}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d65d78b99fd2e44939b2b08128e48518, type: 3}
 --- !u!1 &744247435
 GameObject:
@@ -1374,8 +1381,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Personaje
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d06ff98470738a444bd07ec2fd492a15, type: 2}
+  m_sharedMaterial: {fileID: 236681117507572923, guid: d06ff98470738a444bd07ec2fd492a15, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1409,10 +1416,10 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 17.9
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 1.11
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1488,6 +1495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   interactionName: Examinar
+  dialogueManager: {fileID: 0}
   volume: {fileID: 1325319353}
   playerCamera: {fileID: 8133167646827122099}
   exitDistance: 6
@@ -1716,11 +1724,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9deede16795ddf428c0973881643432, type: 3}
   m_PrefabInstance: {fileID: 932256411}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &942113813 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1578226325687279816, guid: d65d78b99fd2e44939b2b08128e48518, type: 3}
-  m_PrefabInstance: {fileID: 735673279}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &990363154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1807,7 +1810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1127471747
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1826,8 +1829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -23, y: -127}
-  m_SizeDelta: {x: -282.9283, y: -335.3884}
+  m_AnchoredPosition: {x: -25.9995, y: -130.3586}
+  m_SizeDelta: {x: -276.9294, y: -328.6713}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1127471748
 MonoBehaviour:
@@ -2080,15 +2083,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3233844606672322622, guid: 80375654f30864e0790f6ba698b2fe9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.90929
+      value: 2.185
       objectReference: {fileID: 0}
     - target: {fileID: 3233844606672322622, guid: 80375654f30864e0790f6ba698b2fe9f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.41707
+      value: -4.47
       objectReference: {fileID: 0}
     - target: {fileID: 3233844606672322622, guid: 80375654f30864e0790f6ba698b2fe9f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.0620003
+      value: 1.24
       objectReference: {fileID: 0}
     - target: {fileID: 3233844606672322622, guid: 80375654f30864e0790f6ba698b2fe9f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2528,8 +2531,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d06ff98470738a444bd07ec2fd492a15, type: 2}
+  m_sharedMaterial: {fileID: 236681117507572923, guid: d06ff98470738a444bd07ec2fd492a15, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2553,14 +2556,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2622,41 +2625,14 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -76.98619, y: -20.097109}
-  m_SizeDelta: {x: 565.738, y: 56.1942}
+  m_AnchoredPosition: {x: 16, y: -32}
+  m_SizeDelta: {x: 729.97, y: 87.1117}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1511598313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2210472296847702642, guid: d65d78b99fd2e44939b2b08128e48518, type: 3}
   m_PrefabInstance: {fileID: 735673279}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1511598314
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942113813}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!4 &1700143527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5255660927256282674, guid: 11d18ad05363b224b8c84d12c97f3084, type: 3}
@@ -2742,6 +2718,56 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7825983306705509995, guid: 2e4915257fe0a4750b9e5c01bba7bcbc, type: 3}
   m_PrefabInstance: {fileID: 266640457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1766194957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
+  m_PrefabInstance: {fileID: 170345275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1766194958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766194957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83fca1afea99d447ba60129716605b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  interactionName: Hablar
+  dialogueManager: {fileID: 2073498996}
+  volume: {fileID: 0}
+  playerCamera: {fileID: 0}
+  exitDistance: 10
+--- !u!136 &1766194959
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766194957}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25757432
+  m_Height: 1.599684
+  m_Direction: 1
+  m_Center: {x: -0.060757518, y: 0.5950943, z: 0.1351049}
+--- !u!95 &1766194960 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: db50f29597abc0f41a0aea830a5a488b, type: 3}
+  m_PrefabInstance: {fileID: 170345275}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1778745618
 PrefabInstance:
@@ -2985,10 +3011,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9c77138b8bfe64694c371334a37535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogoManager
-  dialoguePanel: {fileID: 0}
-  speakerName: {fileID: 0}
-  dialogueText: {fileID: 0}
-  dialogueLines: []
+  dialoguePanel: {fileID: 1127471746}
+  speakerName: {fileID: 744247438}
+  dialogueText: {fileID: 1428816661}
+  dialogueLines:
+  - Bienvenida. Puedes sentarte
+  - "Antes de comenzar, quiero que est\xE9s tranquila. Este es un espacio seguro"
+  - "Cu\xE9ntame, \xBFqu\xE9 te trae hoy aqu\xED?"
+  - "No s\xE9 muy bien c\xF3mo explicarlo..."
+  - "Desde hace un tiempo tengo mucho miedo al agua, a los r\xEDos, principalmente.
+    Incluso estar cerca de ellos me pone muy nerviosa."
+  - Desde hace un tiempo tengo mucho miedo al agua.
+  - "\xBFHa ocurrido algo que pueda explicar ese miedo?"
+  - "No recuerdo haber tenido ning\xFAn accidente. No recuerdo haberme ahogado ni
+    nada parecido.\n"
+  - Pero cuando veo agua... siento que algo malo va a pasar.
+  - "\xBFHas tenido este miedo desde ni\xF1a?"
+  - Hay cosas de mi infancia que recuerdo muy poco...
+  speakerNames:
+  - Terapeuta
+  - Terapeuta
+  - Terapeuta
+  - Catherine
+  - Catherine
+  - Catherine
+  - Terapeuta
+  - Catherine
+  - Catherine
+  - Terapeuta
+  - Catherine
+  therapistAnimator: {fileID: 1766194960}
   dialogueActive: 0
 --- !u!4 &2073498997
 Transform:

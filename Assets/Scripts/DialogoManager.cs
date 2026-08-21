@@ -13,6 +13,8 @@ public class DialogueManager : MonoBehaviour
     [TextArea(2, 5)]
     public string[] dialogueLines;
 
+    public string[] speakerNames;
+
     [Header("Therapist Animation")]
     public Animator therapistAnimator;
 
@@ -26,11 +28,9 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-      
         if (!dialogueActive)
             return;
 
-        // Presionar E para avanzar
         if (Keyboard.current != null &&
             Keyboard.current.eKey.wasPressedThisFrame)
         {
@@ -44,12 +44,6 @@ public class DialogueManager : MonoBehaviour
         currentLine = 0;
 
         dialoguePanel.SetActive(true);
-
-        
-        if (therapistAnimator != null)
-        {
-            therapistAnimator.SetBool("isTalking", true);
-        }
 
         ShowLine();
     }
@@ -73,8 +67,23 @@ public class DialogueManager : MonoBehaviour
 
     private void ShowLine()
     {
-        speakerName.text = "Terapeuta";
+        // Mostrar quién habla
+        speakerName.text = speakerNames[currentLine];
+
+       
         dialogueText.text = dialogueLines[currentLine];
+
+        if (therapistAnimator != null)
+        {
+            if (speakerNames[currentLine] == "Terapeuta")
+            {
+                therapistAnimator.SetBool("isTalking", true);
+            }
+            else
+            {
+                therapistAnimator.SetBool("isTalking", false);
+            }
+        }
     }
 
     private void EndDialogue()
@@ -83,7 +92,6 @@ public class DialogueManager : MonoBehaviour
 
         dialoguePanel.SetActive(false);
 
-       
         if (therapistAnimator != null)
         {
             therapistAnimator.SetBool("isTalking", false);
