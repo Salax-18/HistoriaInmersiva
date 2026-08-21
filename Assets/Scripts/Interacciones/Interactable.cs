@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using System.Collections;
 
 public class Interactable : MonoBehaviour
 {
@@ -18,12 +19,15 @@ public class Interactable : MonoBehaviour
     [Header("Exit Settings")]
     public float exitDistance = 10f;
 
+    [Header("Memory Effect")]
+    public AudioSource memoryAudio;
+    public float memoryDuration = 7f;
+
     private DepthOfField depthOfField;
     private Vignette vignette;
 
     private void Start()
     {
-       
         if (volume != null)
         {
             volume.profile.TryGet(out depthOfField);
@@ -41,21 +45,25 @@ public class Interactable : MonoBehaviour
                 vignette.intensity.value = 0f;
             }
         }
+
+        if (memoryAudio != null)
+        {
+            memoryAudio.Stop();
+        }
     }
 
     public void Interact()
     {
         Debug.Log("Interacción con: " + gameObject.name);
 
-      
-
+        // Si este objeto tiene diálogo
         if (dialogueManager != null)
         {
             dialogueManager.StartDialogue();
             return;
         }
 
-
+        // Activar enfoque
         if (depthOfField != null)
         {
             depthOfField.active = true;
@@ -64,17 +72,51 @@ public class Interactable : MonoBehaviour
             depthOfField.focusDistance.value = 8f;
         }
 
+        // Activar viñeta
         if (vignette != null)
         {
             vignette.intensity.overrideState = true;
             vignette.intensity.value = 0.35f;
         }
+
+        // Activar audio del recuerdo
+        if (memoryAudio != null)
+        {
+            StartCoroutine(MemoryEffect());
+        }
+    }
+
+    private IEnumerator MemoryEffect()
+    {
+        Debug.Log("RECUERDO DEL CUADRO");
+
+        memoryAudio.Play();
+
+        // Mantener el recuerdo durante 7 segundos
+        yield return new WaitForSeconds(memoryDuration);
+
+        // Detener sonido
+        memoryAudio.Stop();
+
+        // Quitar viñeta
+        if (vignette != null)
+        {
+            vignette.intensity.value = 0f;
+        }
+
+        // Quitar desenfoque
+        if (depthOfField != null)
+        {
+            depthOfField.active = false;
+        }
+
+        Debug.Log("FIN DEL RECUERDO");
     }
 
     private void Update()
     {
-        // Si este objeto es un terapeuta con diálogo,
-        // no necesitamos controlar el Depth of Field.
+        // Si este objeto tiene diálogo,
+        // no controlar el Depth of Field automáticamente
         if (dialogueManager != null)
             return;
 

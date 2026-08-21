@@ -40,7 +40,7 @@ public class DialogueManager : MonoBehaviour
             return;
 
         if (Keyboard.current != null &&
-            Keyboard.current.eKey.wasPressedThisFrame)
+            Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             NextLine();
         }
