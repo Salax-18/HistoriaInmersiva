@@ -12,11 +12,19 @@ public class DialogueManager : MonoBehaviour
     [Header("Dialogue")]
     [TextArea(2, 5)]
     public string[] dialogueLines;
-
     public string[] speakerNames;
+
+    [Header("Regression Dialogue")]
+
+    [TextArea(2, 5)]
+    public string[] regressionDialogueLines;
+    public string[] regressionSpeakerNames;
 
     [Header("Therapist Animation")]
     public Animator therapistAnimator;
+
+    [Header("Regression")]
+    public SecuenciaRegresion secuenciaRegresion;
 
     private int currentLine = 0;
     public bool dialogueActive = false;
@@ -47,6 +55,20 @@ public class DialogueManager : MonoBehaviour
 
         ShowLine();
     }
+
+    public void StartRegressionDialogue()
+    {
+        dialogueLines = regressionDialogueLines;
+        speakerNames = regressionSpeakerNames;
+
+        dialogueActive = true;
+        currentLine = 0;
+
+        dialoguePanel.SetActive(true);
+
+        ShowLine();
+    }
+
 
     public void NextLine()
     {
