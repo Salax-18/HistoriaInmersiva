@@ -21,10 +21,13 @@ public class Interactable : MonoBehaviour
 
     [Header("Memory Effect")]
     public AudioSource memoryAudio;
+    public AudioSource catherineAudio;
     public float memoryDuration = 7f;
 
     private DepthOfField depthOfField;
     private Vignette vignette;
+
+    private bool memoryPlaying = false;
 
     private void Start()
     {
@@ -50,20 +53,30 @@ public class Interactable : MonoBehaviour
         {
             memoryAudio.Stop();
         }
+
+        if (catherineAudio != null)
+        {
+            catherineAudio.Stop();
+        }
     }
 
     public void Interact()
     {
         Debug.Log("Interacción con: " + gameObject.name);
 
-        // Si este objeto tiene diálogo
+   
+
         if (dialogueManager != null)
         {
             dialogueManager.StartDialogue();
             return;
         }
 
-        // Activar enfoque
+
+        if (memoryPlaying)
+            return;
+
+        // Activar desenfoque
         if (depthOfField != null)
         {
             depthOfField.active = true;
@@ -79,7 +92,7 @@ public class Interactable : MonoBehaviour
             vignette.intensity.value = 0.35f;
         }
 
-        // Activar audio del recuerdo
+        // Comenzar recuerdo
         if (memoryAudio != null)
         {
             StartCoroutine(MemoryEffect());
@@ -88,35 +101,57 @@ public class Interactable : MonoBehaviour
 
     private IEnumerator MemoryEffect()
     {
+        memoryPlaying = true;
+
         Debug.Log("RECUERDO DEL CUADRO");
 
-        memoryAudio.Play();
 
-        // Mantener el recuerdo durante 7 segundos
+        if (memoryAudio != null)
+        {
+            memoryAudio.Play();
+        }
+
+    
         yield return new WaitForSeconds(memoryDuration);
 
-        // Detener sonido
-        memoryAudio.Stop();
+       
+        if (memoryAudio != null)
+        {
+            memoryAudio.Stop();
+        }
 
-        // Quitar viñeta
+        Debug.Log("TERMINAN LAS RISAS");
+
+        //  Reproducir "Catherine..."
+        if (catherineAudio != null)
+        {
+            Debug.Log("CATHERINE...");
+
+            catherineAudio.Play();
+
+            // Esperar hasta que termine la voz
+            yield return new WaitWhile(() => catherineAudio.isPlaying);
+        }
+
+        
         if (vignette != null)
         {
             vignette.intensity.value = 0f;
         }
 
-        // Quitar desenfoque
         if (depthOfField != null)
         {
             depthOfField.active = false;
         }
 
         Debug.Log("FIN DEL RECUERDO");
+
+        memoryPlaying = false;
     }
 
     private void Update()
     {
-        // Si este objeto tiene diálogo,
-        // no controlar el Depth of Field automáticamente
+   
         if (dialogueManager != null)
             return;
 
@@ -128,7 +163,7 @@ public class Interactable : MonoBehaviour
             transform.position
         );
 
-        if (distance > exitDistance)
+        if (distance > exitDistance && !memoryPlaying)
         {
             if (depthOfField != null)
             {

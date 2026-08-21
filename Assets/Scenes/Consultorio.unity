@@ -1649,6 +1649,7 @@ MonoBehaviour:
   playerCamera: {fileID: 8133167646827122099}
   exitDistance: 6
   memoryAudio: {fileID: 822630302}
+  catherineAudio: {fileID: 822630303}
   memoryDuration: 7
 --- !u!82 &822630302
 AudioSource:
@@ -1758,8 +1759,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 3acb8ff561efeff42a23ed53dcd92c3e, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3146,6 +3147,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   exitDistance: 10
   memoryAudio: {fileID: 0}
+  catherineAudio: {fileID: 0}
   memoryDuration: 4
 --- !u!136 &1766194959
 CapsuleCollider:
