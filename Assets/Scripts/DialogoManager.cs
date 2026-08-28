@@ -9,13 +9,12 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text speakerName;
     public TMP_Text dialogueText;
 
-    [Header("Dialogue")]
+    [Header("Dialogue 1")]
     [TextArea(2, 5)]
     public string[] dialogueLines;
     public string[] speakerNames;
 
-    [Header("Regression Dialogue")]
-
+    [Header("Dialogue 2 - Regression")]
     [TextArea(2, 5)]
     public string[] regressionDialogueLines;
     public string[] regressionSpeakerNames;
@@ -29,6 +28,13 @@ public class DialogueManager : MonoBehaviour
     private int currentLine = 0;
     public bool dialogueActive = false;
 
+    [Header("Hypnosis Audio")]
+    public AudioSource hypnosisAudio;
+    public float hypnosisFadeInDuration = 4f;
+
+    // Indica si actualmente estamos en el diálogo 2
+    private bool isRegressionDialogue = false;
+
     private void Start()
     {
         dialoguePanel.SetActive(false);
@@ -39,6 +45,7 @@ public class DialogueManager : MonoBehaviour
         if (!dialogueActive)
             return;
 
+        // SPACE para avanzar el diálogo
         if (Keyboard.current != null &&
             Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -46,8 +53,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // DIÁLOGO 1
+
+
     public void StartDialogue()
     {
+        isRegressionDialogue = false;
+
+       
+
         dialogueActive = true;
         currentLine = 0;
 
@@ -56,17 +70,20 @@ public class DialogueManager : MonoBehaviour
         ShowLine();
     }
 
+
+    // DIÁLOGO 2
+   
+
     public void StartRegressionDialogue()
     {
-        dialogueLines = regressionDialogueLines;
-        speakerNames = regressionSpeakerNames;
+        isRegressionDialogue = true;
 
         dialogueActive = true;
         currentLine = 0;
 
         dialoguePanel.SetActive(true);
 
-        ShowLine();
+        ShowRegressionLine();
     }
 
 
@@ -77,27 +94,93 @@ public class DialogueManager : MonoBehaviour
 
         currentLine++;
 
-        if (currentLine >= dialogueLines.Length)
+        if (isRegressionDialogue)
         {
-            EndDialogue();
+            if (currentLine >= regressionDialogueLines.Length)
+            {
+                EndDialogue();
+            }
+            else
+            {
+                ShowRegressionLine();
+            }
         }
         else
         {
-            ShowLine();
+            if (currentLine >= dialogueLines.Length)
+            {
+                EndDialogue();
+            }
+            else
+            {
+                ShowLine();
+            }
         }
     }
 
+
+    // MOSTRAR DIÁLOGO 1
+ 
+
     private void ShowLine()
     {
-        // Mostrar quién habla
         speakerName.text = speakerNames[currentLine];
-
-       
         dialogueText.text = dialogueLines[currentLine];
 
+        UpdateTherapistAnimation();
+    }
+
+
+    // MOSTRAR DIÁLOGO 2
+
+
+    private void ShowRegressionLine()
+    {
+        speakerName.text = regressionSpeakerNames[currentLine];
+        dialogueText.text = regressionDialogueLines[currentLine];
+
+        UpdateTherapistAnimation();
+
+        // La hipnosis comienza cuando aparece la línea 2
+        if (currentLine == 2)
+        {
+            if (hypnosisAudio != null)
+            {
+                StartCoroutine(FadeInHypnosis());
+            }
+        }
+    }
+    //corrutina para hacer fade in del audio de hipnosis
+    private System.Collections.IEnumerator FadeInHypnosis()
+    {
+        hypnosisAudio.volume = 0f;
+        hypnosisAudio.Play();
+
+        float elapsed = 0f;
+
+        while (elapsed < hypnosisFadeInDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            float t = elapsed / hypnosisFadeInDuration;
+
+            hypnosisAudio.volume = Mathf.Lerp(0f, 1f, t);
+
+            yield return null;
+        }
+
+        hypnosisAudio.volume = 1f;
+    }
+
+
+    // ANIMACIÓN DEL TERAPEUTA
+
+
+    private void UpdateTherapistAnimation()
+    {
         if (therapistAnimator != null)
         {
-            if (speakerNames[currentLine] == "Terapeuta")
+            if (speakerName.text == "Terapeuta")
             {
                 therapistAnimator.SetBool("isTalking", true);
             }
@@ -108,6 +191,10 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+   
+    // TERMINAR DIÁLOGO
+   
+
     private void EndDialogue()
     {
         dialogueActive = false;
@@ -117,6 +204,16 @@ public class DialogueManager : MonoBehaviour
         if (therapistAnimator != null)
         {
             therapistAnimator.SetBool("isTalking", false);
+        }
+
+   
+       
+        if (isRegressionDialogue)
+        {
+            if (secuenciaRegresion != null)
+            {
+                secuenciaRegresion.StartRegression();
+            }
         }
     }
 }
