@@ -164,12 +164,12 @@ public class DialogueManager : MonoBehaviour
 
             float t = elapsed / hypnosisFadeInDuration;
 
-            hypnosisAudio.volume = Mathf.Lerp(0f, 1f, t);
+            hypnosisAudio.volume = Mathf.Lerp(0f, 0.6f, t);
 
             yield return null;
         }
 
-        hypnosisAudio.volume = 1f;
+        hypnosisAudio.volume = 0.6f;
     }
 
 
